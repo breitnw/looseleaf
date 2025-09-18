@@ -4,7 +4,9 @@ A simple, single-header drawing library, rooted in binary trees
 > 🚧 This project is under construction!
 
 ## What will this project entail?
-Once complete, looseleaf will be a simple and flexible tool for designing immediate-mode user interfaces. It is _not_ aimed at flexbox-type layouts: instead, text boxes, images, and other UI elements are laid out in a simple binary tree structure using node combinators. This allows interfaces to be constructed in a functional style: rather than committing elements to the screen with loops, nodes are constructed and combined with list operators like maps and folds. 
+Once complete, looseleaf will be a simple and flexible tool for designing immediate-mode user interfaces. It is _not_ aimed at flexbox-type layouts: instead, text boxes, images, and other UI elements are laid out in a simple binary tree structure using node combinators. This allows interfaces to be constructed in a functional style: rather than committing elements to the screen with loops, nodes are constructed and combined with list operations. 
+
+For the functional nerds out there, looseleaf's coolness comes from the fact that nodes are monoidal: `LL_EMPTY_LEAF` is the unit, and the binary node combinators are monoidal products! Basically, what this means is that there awesome ways to fold up lists of UI elements. 
 
 ## Node combinators
 Some of the node combinators looseleaf offers include:
@@ -44,10 +46,10 @@ int main() {
   // +----------+----------+
 
   // folding over an array
-  const char *messages[3];
-  messages[0] = "zero";
-  messages[1] = "one";
-  messages[2] = "two";
+  const ll_NodeHandle messages[3];
+  messages[0] = ll_text({}, "zero");
+  messages[1] = ll_text({}, "one");
+  messages[2] = ll_text({}, "two");
   ll_NodeHandle align_demo = LL_FOLDL1(ll_above, {.align_h = LL_HORIZ_ALIGN_RIGHT}, messages);
 
   // will draw something like this...
